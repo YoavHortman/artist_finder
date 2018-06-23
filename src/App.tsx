@@ -1,22 +1,53 @@
 import * as React from 'react';
 import './App.css';
+import {Artist} from "./models/Models";
+import {SearchBarWrapperBar} from "./wrappers/SearchBarWrapper";
 
-import logo from './logo.svg';
+// Artist can be in a few states, explicitly state them and force the programmer to handle them
+export type ArtistState = Artist | "NO_VALUE" | "LOADING" | "NOT_FOUND";
 
-class App extends React.Component {
-  public render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+interface AppState {
+    artist: ArtistState;
+}
+
+class App extends React.Component<{}, AppState> {
+    constructor(props: {}) {
+        super(props);
+
+        this.state = {
+            artist: "NO_VALUE",
+        };
+    }
+
+    handleArtistChange = (newState: ArtistState) => {
+        this.setState({artist: newState});
+    }
+
+    renderArtist(artist: ArtistState) {
+        switch (artist) {
+            case "NO_VALUE": {
+                return "Search something";
+            }
+            case "LOADING": {
+                return "Loading";
+            }
+            case "NOT_FOUND": {
+                return "No results";
+            }
+            default: {
+                return artist.facebookUrl;
+            }
+        }
+    }
+
+    public render() {
+        return (
+            <div className="App">
+                <SearchBarWrapperBar onArtistStateChange={this.handleArtistChange}/>
+                {this.renderArtist(this.state.artist)}
+            </div>
+        );
+    }
 }
 
 export default App;
