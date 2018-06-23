@@ -1,7 +1,7 @@
 import * as React from "react";
 import {ArtistState} from "../App";
 import {SearchBar} from "../components/SearchBar";
-import {getArtistInfoByName} from "../API";
+import {getArtistInfoByName} from "../api/API";
 
 const LOCAL_STORAGE_LAST_SEARCH_KEY = "last_search";
 

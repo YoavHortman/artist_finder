@@ -1,6 +1,6 @@
 import {HttpRequest} from "./HttpRequest";
-import {Artist} from "./models/Models";
-import {parseServerJsonToArtist} from "./models/ModelParser";
+import {Artist} from "../models/Models";
+import {parseServerJsonToArtist} from "../models/ModelParser";
 
 const API_BASE_URL = "http://rest.bandsintown.com/";
 const APP_ID = "?app_id=just_a_string";
