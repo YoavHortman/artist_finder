@@ -1,8 +1,10 @@
 import * as React from 'react';
 import './App.css';
+import assertNever from "assert-never";
 import {Artist} from "./models/Models";
 import {SearchBarWrapperBar} from "./wrappers/SearchBarWrapper";
 import {EventListWrapper} from "./wrappers/EventListWrapper";
+import {ArtistComponent} from "./components/ArtistComponent";
 
 // Artist can be in a few states, explicitly state them and force the programmer to handle them
 export type ArtistState = ArtistState.FoundArtist | ArtistState.NotFound | ArtistState.NoValue | ArtistState.Loading;
@@ -69,13 +71,13 @@ class App extends React.Component<{}, AppState> {
             }
             case "FoundArtist": {
                 return (
-                    <div>
-
-                    </div>
+                    <ArtistComponent artist={artistState.artist}/>
                 )
             }
             default: {
-                throw new Error("Unexpected state");
+                // This is for exhaustive checks, if we add a state to ArtistState this will not compile
+                // So it'll be easy to fix all the errors caused by changing the state
+                return assertNever(artistState);
             }
         }
     }
@@ -86,9 +88,7 @@ class App extends React.Component<{}, AppState> {
                 <div className={"App__bodyContainer"}>
                     <SearchBarWrapperBar onArtistStateChange={this.handleArtistChange}/>
                     {this.renderArtist(this.state.artistState)}
-                    <EventListWrapper
-                        artistState={this.state.artistState}
-                    />
+                    <EventListWrapper artistState={this.state.artistState}/>
                 </div>
             </div>
         );
