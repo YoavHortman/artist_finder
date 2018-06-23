@@ -66,9 +66,7 @@ export class EventListWrapper extends React.Component<EventListWrapperProps, Eve
         }
 
         return (
-            <div>
-                <EventList events={this.state.events}/>
-            </div>
+            <EventList events={this.state.events}/>
         );
     }
 }

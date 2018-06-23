@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Artist} from "../models/Models";
+import "./ArtistComponent.css";
 
 export interface ArtistComponentProps {
     artist: Artist;
@@ -13,7 +14,10 @@ export class ArtistComponent extends React.Component<ArtistComponentProps, {}> {
     render() {
         return (
             <div className={"ArtistComponent__root"}>
-
+                <div className={"ArtistComponent__artistPhoto"} style={{
+                    background: `url(${this.props.artist.photoUrl})`
+                }}></div>
+                {this.props.artist.name}
             </div>
         );
     }

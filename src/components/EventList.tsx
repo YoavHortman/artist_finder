@@ -25,8 +25,7 @@ export class EventList extends React.Component<EventListProps, {}> {
                     <div>
                         {this.props.events.map((event, index) => {
                             return <div key={index}>{event.lineup}</div>;
-                        })
-                        }
+                        })}
                     </div>
                 }
             </div>
