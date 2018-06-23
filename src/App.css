@@ -18,15 +18,17 @@
 
 @media (min-width: 550px) {
   .App__root {
-    height: 70vh;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
     padding: 100px;
+    background: #d3d3d347;
   }
 
   .App__bodyContainer {
+    background: white;
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

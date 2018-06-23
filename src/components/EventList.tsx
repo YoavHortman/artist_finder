@@ -1,6 +1,7 @@
 import * as React from "react";
 import "./EventList.css";
 import {ArtistEventData} from "../models/Models";
+import {EventItem} from "./EventItem";
 
 export interface EventListProps {
     events: ArtistEventData[];
@@ -24,7 +25,7 @@ export class EventList extends React.Component<EventListProps, {}> {
                     :
                     <div>
                         {this.props.events.map((event, index) => {
-                            return <div key={index}>{event.lineup}</div>;
+                            return <EventItem key={index} event={event}/>;
                         })}
                     </div>
                 }
