@@ -1,6 +1,7 @@
 import * as React from "react";
 import {getArtistEventsByName} from "../api/API";
 import {Artist, ArtistEventData} from "../models/Models";
+import "./EventListWrapper.css";
 import {EventList} from "../components/EventList";
 import {ArtistState} from "../App";
 
@@ -50,14 +51,16 @@ export class EventListWrapper extends React.Component<EventListWrapperProps, Eve
 
         if (this.state.events === "LOADING") {
             return (
-                <div>
+                <div className={"EventListWrapper__loading"}>
                     Loading events...
                 </div>
             );
         }
 
         return (
-            <EventList events={this.state.events}/>
+            <div>
+                <EventList events={this.state.events}/>
+            </div>
         );
     }
 }

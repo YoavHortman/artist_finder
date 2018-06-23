@@ -50,23 +50,17 @@ class App extends React.Component<{}, AppState> {
         switch (artistState.type) {
             case "NoValue": {
                 return (
-                    <div>
-                        Search for an artist!
-                    </div>
+                    <div className={"App__artistSearchState"}>Search for an artist!</div>
                 );
             }
             case "Loading": {
                 return (
-                    <div>
-                        Loading...
-                    </div>
+                    <div className={"App__artistSearchState"}>Loading...</div>
                 );
             }
             case "NotFound": {
                 return (
-                    <div>
-                        Sorry, couldn't find anything...
-                    </div>
+                    <div className={"App__artistSearchState"}>Sorry, couldn't find anything...</div>
                 );
             }
             case "FoundArtist": {
