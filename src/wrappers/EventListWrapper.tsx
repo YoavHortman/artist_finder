@@ -1,5 +1,6 @@
 import * as React from "react";
 import {getArtistEventsByName} from "../api/API";
+import assertNever from "assert-never";
 import {Artist, ArtistEventData} from "../models/Models";
 import "./EventListWrapper.css";
 import {EventList} from "../components/EventList";
@@ -23,11 +24,18 @@ export class EventListWrapper extends React.Component<EventListWrapperProps, Eve
 
     // Null means no artist yet
     getArtist(artistState: ArtistState): Artist | null {
-        if (artistState.type === "FoundArtist") {
-            return artistState.artist;
+        switch (artistState.type) {
+            case "FoundArtist": {
+                return artistState.artist;
+            }
+            case "Loading":
+            case "NotFound":
+            case "NoValue":
+                return null;
+            default: {
+                return assertNever(artistState);
+            }
         }
-
-        return null;
     }
 
     // When we receive a new artist we get his events
