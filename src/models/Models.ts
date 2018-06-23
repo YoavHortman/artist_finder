@@ -21,8 +21,9 @@ export interface ArtistEventData {
     artistId: string;
     url: string;
     onSaleDatetime: Date;
+    dateTime: Date;
     description: string;
-    venue: EventVenueData[];
+    venue: EventVenueData;
     offers: EventOfferData[];
     lineup: string[];
 }

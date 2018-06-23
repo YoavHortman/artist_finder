@@ -2,6 +2,7 @@ import * as React from 'react';
 import './App.css';
 import {Artist} from "./models/Models";
 import {SearchBarWrapperBar} from "./wrappers/SearchBarWrapper";
+import {EventList} from "./components/EventList";
 
 // Artist can be in a few states, explicitly state them and force the programmer to handle them
 export type ArtistState = Artist | "NO_VALUE" | "LOADING" | "NOT_FOUND";
@@ -46,6 +47,9 @@ class App extends React.Component<{}, AppState> {
                 <div className={"App__bodyContainer"}>
                     <SearchBarWrapperBar onArtistStateChange={this.handleArtistChange}/>
                     {this.renderArtist(this.state.artist)}
+                    <EventList
+                        artist={this.state.artist as any}
+                    />
                 </div>
             </div>
         );
