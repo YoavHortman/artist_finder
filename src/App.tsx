@@ -42,9 +42,11 @@ class App extends React.Component<{}, AppState> {
 
     public render() {
         return (
-            <div className="App">
-                <SearchBarWrapperBar onArtistStateChange={this.handleArtistChange}/>
-                {this.renderArtist(this.state.artist)}
+            <div className="App__root">
+                <div className={"App__bodyContainer"}>
+                    <SearchBarWrapperBar onArtistStateChange={this.handleArtistChange}/>
+                    {this.renderArtist(this.state.artist)}
+                </div>
             </div>
         );
     }

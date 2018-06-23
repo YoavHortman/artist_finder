@@ -30,7 +30,7 @@ export class SearchBar extends React.Component<SearchBarProps, {}> {
                     type={"text"}
                     onChange={(e) => this.handleTextChange(e.target.value)}
                     value={this.props.searchQuery === null ? "" : this.props.searchQuery}
-                    placeholder={"Free text search..."}
+                    placeholder={"Artist name, EG: Maroon 5"}
                     className={"SearchBar__input"}
                 />
             </div>
