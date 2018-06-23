@@ -31,11 +31,11 @@ export class SearchBarWrapperBar extends React.Component<SearchBarWrapperProps, 
 
     handleSearchQueryChange = (newVal: string | null) => {
         this.setState({searchQuery: newVal});
-        this.props.onArtistStateChange("LOADING");
+        this.props.onArtistStateChange({type: "Loading"});
 
         if (newVal === null) {
             localStorage.removeItem(LOCAL_STORAGE_LAST_SEARCH_KEY);
-            this.props.onArtistStateChange("NO_VALUE");
+            this.props.onArtistStateChange({type: "NoValue"});
         } else {
             this.getArtist(newVal);
         }

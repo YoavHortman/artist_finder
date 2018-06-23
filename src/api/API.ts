@@ -1,6 +1,8 @@
 import {HttpRequest} from "./HttpRequest";
-import {Artist, ArtistEventData} from "../models/Models";
+import {ArtistEventData} from "../models/Models";
 import {parseServerJsonToArtist, parseServerJsonToEvent} from "../models/ModelParser";
+import {ArtistState} from "../App";
+
 
 const API_BASE_URL = "http://rest.bandsintown.com/";
 const APP_ID = "?app_id=just_a_string";
@@ -37,15 +39,16 @@ async function getRequest(endpoint: string) {
     }
 }
 
-function parseArtist(artistStr: string): "NOT_FOUND" | Artist {
-    // Length of 2 means empty
-    if (artistStr.length === 2) {
-        return "NOT_FOUND";
+function parseArtist(artistStr: string): ArtistState.FoundArtist | ArtistState.NotFound {
+    const json = JSON.parse(artistStr);
+    // Sometimes returns empty str sometimes return json with error
+    if (json.error || artistStr.length === 2) {
+        return {type: "NotFound"};
     }
-    return parseServerJsonToArtist(JSON.parse(artistStr));
+    return {type: "FoundArtist", artist: parseServerJsonToArtist(JSON.parse(artistStr))};
 }
 
-export async function getArtistInfoByName(name: string): Promise<Artist | "NOT_FOUND"> {
+export async function getArtistInfoByName(name: string): Promise<ArtistState.FoundArtist | ArtistState.NotFound> {
     const parsedName = parseArtistNameForRequest(name);
     const result = await getRequest(`artists/${parsedName}${APP_ID}`);
     return parseArtist(result);

@@ -2,13 +2,31 @@ import * as React from 'react';
 import './App.css';
 import {Artist} from "./models/Models";
 import {SearchBarWrapperBar} from "./wrappers/SearchBarWrapper";
-import {EventList} from "./components/EventList";
+import {EventListWrapper} from "./wrappers/EventListWrapper";
 
 // Artist can be in a few states, explicitly state them and force the programmer to handle them
-export type ArtistState = Artist | "NO_VALUE" | "LOADING" | "NOT_FOUND";
+export type ArtistState = ArtistState.FoundArtist | ArtistState.NotFound | ArtistState.NoValue | ArtistState.Loading;
+export namespace ArtistState {
+    export interface NoValue {
+        type: "NoValue";
+    }
+
+    export interface Loading {
+        type: "Loading";
+    }
+
+    export interface NotFound {
+        type: "NotFound";
+    }
+
+    export interface FoundArtist {
+        type: "FoundArtist";
+        artist: Artist;
+    }
+}
 
 interface AppState {
-    artist: ArtistState;
+    artistState: ArtistState;
 }
 
 class App extends React.Component<{}, AppState> {
@@ -16,29 +34,48 @@ class App extends React.Component<{}, AppState> {
         super(props);
 
         this.state = {
-            artist: "NO_VALUE",
+            artistState: {
+                type: "NoValue"
+            }
         };
     }
 
     handleArtistChange = (newState: ArtistState) => {
-        this.setState({artist: newState});
+        this.setState({artistState: newState});
     }
 
-    renderArtist(artist: ArtistState) {
-        switch (artist) {
-            case "NO_VALUE": {
-                return "Search something";
+    renderArtist(artistState: ArtistState) {
+        switch (artistState.type) {
+            case "NoValue": {
+                return (
+                    <div>
+                        Search for an artist!
+                    </div>
+                );
             }
-            case "LOADING": {
-                return "Loading";
+            case "Loading": {
+                return (
+                    <div>
+                        Loading...
+                    </div>
+                );
             }
-            case "NOT_FOUND": {
-                return "No results";
+            case "NotFound": {
+                return (
+                    <div>
+                        Sorry, couldn't find anything...
+                    </div>
+                );
+            }
+            case "FoundArtist": {
+                return (
+                    <div>
+
+                    </div>
+                )
             }
             default: {
-                return <EventList
-                    artist={artist}
-                />;
+                throw new Error("Unexpected state");
             }
         }
     }
@@ -48,7 +85,10 @@ class App extends React.Component<{}, AppState> {
             <div className="App__root">
                 <div className={"App__bodyContainer"}>
                     <SearchBarWrapperBar onArtistStateChange={this.handleArtistChange}/>
-                    {this.renderArtist(this.state.artist)}
+                    {this.renderArtist(this.state.artistState)}
+                    <EventListWrapper
+                        artistState={this.state.artistState}
+                    />
                 </div>
             </div>
         );
