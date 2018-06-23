@@ -14,9 +14,12 @@ export class ArtistComponent extends React.Component<ArtistComponentProps, {}> {
     render() {
         return (
             <div className={"ArtistComponent__root"}>
-                <div className={"ArtistComponent__artistPhoto"} style={{
-                    background: `url(${this.props.artist.photoUrl})`
-                }}></div>
+                <div
+                    className={"ArtistComponent__artistPhoto"}
+                    style={{
+                        background: `url(${this.props.artist.photoUrl})`
+                    }}
+                />
                 {this.props.artist.name}
             </div>
         );
