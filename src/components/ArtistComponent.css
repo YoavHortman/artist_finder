@@ -8,8 +8,31 @@
     flex-direction: column;
 }
 
-.ArtistComponent__artistPhoto {
+.ArtistComponent__artistName {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.ArtistComponent__titleContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     flex: 1 1 auto;
-    background-repeat: no-repeat;
+}
+
+.ArtistComponent__artistPhoto {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+}
+
+.ArtistComponent__facebookIcon {
+    justify-self: flex-end;
+    background: url("../assets/facebookIcon.png") no-repeat;
     background-size: contain;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
