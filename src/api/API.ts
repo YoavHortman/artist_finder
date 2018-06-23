@@ -17,6 +17,7 @@ async function getRequest(endpoint: string) {
 }
 
 function parseArtist(artistStr: string) {
+    // For some reason length of 2 means empty
     if (artistStr.length === 2) {
         return "NOT_FOUND";
     }
