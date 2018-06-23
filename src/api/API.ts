@@ -38,7 +38,7 @@ async function getRequest(endpoint: string) {
 }
 
 function parseArtist(artistStr: string): "NOT_FOUND" | Artist {
-    // For some reason length of 2 means empty
+    // Length of 2 means empty
     if (artistStr.length === 2) {
         return "NOT_FOUND";
     }
@@ -51,18 +51,8 @@ export async function getArtistInfoByName(name: string): Promise<Artist | "NOT_F
     return parseArtist(result);
 }
 
-function parseEvents(eventStr: string) {
-    return parseServerJsonToEvent(JSON.parse(eventStr));
-}
-
-export async function getArtistEventsByName(name: string | undefined): Promise<ArtistEventData[]> {
-    // TODO temp if for quick tests, REMOVE!!
-    if (name !== undefined) {
-        const parsedName = parseArtistNameForRequest(name);
-        const result = await getRequest(`artists/${parsedName}/events${APP_ID}`);
-        const parsed = parseEvents(result);
-        console.log(parsed);
-        return parsed;
-    }
-    return [];
+export async function getArtistEventsByName(name: string): Promise<ArtistEventData[]> {
+    const parsedName = parseArtistNameForRequest(name);
+    const result = await getRequest(`artists/${parsedName}/events${APP_ID}`);
+    return parseServerJsonToEvent(JSON.parse(result));
 }

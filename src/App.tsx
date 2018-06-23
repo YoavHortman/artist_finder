@@ -36,7 +36,9 @@ class App extends React.Component<{}, AppState> {
                 return "No results";
             }
             default: {
-                return artist.facebookUrl;
+                return <EventList
+                    artist={artist}
+                />;
             }
         }
     }
@@ -47,9 +49,6 @@ class App extends React.Component<{}, AppState> {
                 <div className={"App__bodyContainer"}>
                     <SearchBarWrapperBar onArtistStateChange={this.handleArtistChange}/>
                     {this.renderArtist(this.state.artist)}
-                    <EventList
-                        artist={this.state.artist as any}
-                    />
                 </div>
             </div>
         );
