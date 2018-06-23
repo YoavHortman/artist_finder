@@ -1,7 +1,7 @@
 // LINT IS GOOD~!
 // Too much work for such a small project though...
 
-//{
+{
 //  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
 //  "linterOptions": {
 //    "exclude": [
@@ -9,4 +9,4 @@
 //      "node_modules/**/*.ts"
 //    ]
 //  }
-//}
+}
