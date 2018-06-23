@@ -1,5 +1,6 @@
 import {HttpRequest} from "./HttpRequest";
-import {Artist} from "./Models";
+import {Artist} from "./models/Models";
+import {parseServerJsonToArtist} from "./models/ModelParser";
 
 const API_BASE_URL = "http://rest.bandsintown.com/";
 const APP_ID = "?app_id=just_a_string";
@@ -19,7 +20,7 @@ function parseArtist(artistStr: string) {
     if (artistStr.length === 2) {
         return "NOT_FOUND";
     }
-    return JSON.parse(artistStr);
+    return parseServerJsonToArtist(JSON.parse(artistStr));
 
 }
 
