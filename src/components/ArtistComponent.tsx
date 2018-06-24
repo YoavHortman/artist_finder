@@ -27,10 +27,12 @@ export class ArtistComponent extends React.Component<ArtistComponentProps, {}> {
                         />
                         <div className={"ArtistComponent__artistName"}>{this.props.artist.name}</div>
                     </div>
-                    <div
-                        className={"ArtistComponent__facebookIcon"}
-                        onClick={() => openExternalUrl(this.props.artist.facebookUrl)}
-                    />
+                    {this.props.artist.facebookUrl.length === 0 ? null :
+                        <div
+                            className={"ArtistComponent__facebookIcon"}
+                            onClick={() => openExternalUrl(this.props.artist.facebookUrl)}
+                        />
+                    }
                 </div>
             </div>
         );

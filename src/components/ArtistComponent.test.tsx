@@ -21,3 +21,23 @@ it('Should render an artist correctly', () => {
         .toJSON();
     expect(tree).toMatchSnapshot();
 });
+
+it('Should render an artist with no facebook', () => {
+    const tree = renderer
+        .create(
+            <ArtistComponent
+                artist={{
+                    id: 1,
+                    name: "Yoav Hortman",
+                    url: "url",
+                    photoUrl: "url",
+                    thumbUrl: "url",
+                    facebookUrl: "",
+                    mbid: "1",
+                    tracker_counter: 123,
+                    upcomingEventCount: 123
+                }}
+            />)
+        .toJSON();
+    expect(tree).toMatchSnapshot();
+});
