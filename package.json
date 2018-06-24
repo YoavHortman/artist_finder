@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react-test-renderer": "16.0.1",
+    "assert-never": "1.1.0",
     "react": "16.4.1",
     "react-dom": "16.4.1",
     "react-scripts-ts": "2.16.0",
-    "assert-never": "1.1.0"
+    "react-test-renderer": "16.4.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",
