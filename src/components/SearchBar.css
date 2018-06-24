@@ -13,10 +13,6 @@
     font-size: 18px;
 }
 
-.SearchBar__orderDropDown {
-    margin-left: 10px;
-}
-
 .SearchBar__advancedOptionsButton {
     cursor: pointer;
     margin: 10px;
@@ -31,4 +27,15 @@
 .SearchBar__advancedOptionsContainer {
     display: flex;
     padding: 10px;
+}
+
+.SearchBar__toContainer {
+    margin-left: 10px;
+}
+
+.SearchBar__dateInput {
+    border: none;
+    border-bottom: 1px solid lightblue;
+    margin-left: 5px;
+    font-size: 15px;
 }

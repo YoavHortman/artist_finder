@@ -10,11 +10,8 @@ export interface SearchBarProps {
     onSearchQueryChange: (query: string | null) => void;
     onDatesChange: (dates: DateQuery | null) => void;
 
-    // onOrderByChange: (val: "RATING" | "PRICE") => void;
-
     searchQuery: string | null;
     dateQuery: DateQuery | null;
-    // orderBy: "RATING" | "PRICE"
 }
 
 export interface SearchBarState {
@@ -89,14 +86,17 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                             <div>
                                 From:
                                 <input
+                                    className={"SearchBar__dateInput"}
                                     type={"date"}
                                     value={this.props.dateQuery === null ? "" : this.props.dateQuery.from}
                                     max={this.props.dateQuery === null ? "" : this.props.dateQuery.to}
                                     onChange={(e) => this.handleFromChange(e.target.value)}
                                 />
                             </div>
-                            <div> To:
+                            <div className={"SearchBar__toContainer"}>
+                                To:
                                 <input
+                                    className={"SearchBar__dateInput"}
                                     type={"date"}
                                     value={this.props.dateQuery === null ? "" : this.props.dateQuery.to}
                                     onChange={(e) => this.handleToChange(e.target.value)}
