@@ -7,24 +7,20 @@ import {ArtistState} from "../App";
 const API_BASE_URL = "http://rest.bandsintown.com/";
 const APP_ID = "?app_id=just_a_string";
 
-/**
- * Copied from the api docs:
- * for / use %252F
- * for ? use %253F
- * for * use %252A
- * for " use %27C
- */
 function parseArtistNameForRequest(name: string): string {
-    const slashRegex = new RegExp("/", "g"); // %253F
-    const questionMarkRegex = new RegExp("\\?", "g"); // %252A
-    const doubleQuotesRegex = new RegExp("\"", "g"); // %27C
-    const starRegex = new RegExp("\\*", "g"); // %252A
-
-    return name
-        .replace(slashRegex, "%253F")
-        .replace(questionMarkRegex, "%252A")
-        .replace(doubleQuotesRegex, "%27C")
-        .replace(starRegex, "%252A");
+    /**
+     * Copied from the api docs:
+     * for / use %252F
+     * for ? use %253F
+     * for * use %252A
+     * for " use %27C
+     *
+     * !!!IMPORTANT!!!
+     * That just seems wrong.
+     * Characters like * work fine but characters like # fail, use regular uri encoder
+     *
+     */
+    return encodeURIComponent(name);
 
 }
 
@@ -41,7 +37,7 @@ async function getRequest(endpoint: string) {
 
 function parseArtist(artistStr: string): ArtistState.FoundArtist | ArtistState.NotFound {
     const json = JSON.parse(artistStr);
-    // Sometimes returns empty str sometimes return json with error
+    // Sometimes returns str with len of 2 sometimes return json with error
     if (json.error || artistStr.length === 2) {
         return {type: "NotFound"};
     }

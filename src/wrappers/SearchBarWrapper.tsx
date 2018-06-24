@@ -29,7 +29,11 @@ export class SearchBarWrapperBar extends React.Component<SearchBarWrapperProps, 
         }
     }
 
+    private requestDebounce: NodeJS.Timer;
+
     handleSearchQueryChange = (newVal: string | null) => {
+        clearTimeout(this.requestDebounce);
+
         this.setState({searchQuery: newVal});
         this.props.onArtistStateChange({type: "Loading"});
 
@@ -37,7 +41,9 @@ export class SearchBarWrapperBar extends React.Component<SearchBarWrapperProps, 
             localStorage.removeItem(LOCAL_STORAGE_LAST_SEARCH_KEY);
             this.props.onArtistStateChange({type: "NoValue"});
         } else {
-            this.getArtist(newVal);
+            this.requestDebounce = setTimeout(() => {
+                this.getArtist(newVal);
+            }, 250);
         }
     }
 
