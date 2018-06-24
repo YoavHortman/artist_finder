@@ -45,12 +45,12 @@ export class EventListWrapper extends React.Component<EventListWrapperProps, Eve
         this.setState({events: "LOADING"});
         const artist = this.getArtist(nextProps.artistState);
         if (artist !== null) {
-            this.getEventsForArtist(artist);
+            this.getEventsForArtist(artist, nextProps.dateQuery);
         }
     }
 
-    async getEventsForArtist(artist: Artist) {
-        this.setState({events: await getArtistEventsByName(artist.name, this.props.dateQuery)});
+    async getEventsForArtist(artist: Artist, dateQuery: DateQuery | null) {
+        this.setState({events: await getArtistEventsByName(artist.name, dateQuery)});
     }
 
     render() {
