@@ -10,9 +10,6 @@ export interface EventListProps {
 export class EventList extends React.Component<EventListProps, {}> {
     constructor(props: EventListProps) {
         super(props);
-        this.state = {
-            events: "LOADING"
-        };
     }
 
     render() {

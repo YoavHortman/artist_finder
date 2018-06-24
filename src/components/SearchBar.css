@@ -13,22 +13,22 @@
     font-size: 18px;
 }
 
-.SearchBar__advancedOptionsContainer {
-    border: 1px solid #d3d3d361;
-    padding: 10px;
-    margin: 10px;
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-}
-.SearchBar__orderContainer {
-    margin-bottom: 10px;
-    display: flex;
-}
-
 .SearchBar__orderDropDown {
     margin-left: 10px;
 }
-.SearchBar__specialOfferContainer {
 
+.SearchBar__advancedOptionsButton {
+    cursor: pointer;
+    margin: 10px;
+}
+
+.SearchBar__advancedOptionsButtonOpen {
+    padding-bottom: 10px;
+    margin-bottom: 0;
+    border-bottom: 1px solid lightgray;
+}
+
+.SearchBar__advancedOptionsContainer {
+    display: flex;
+    padding: 10px;
 }

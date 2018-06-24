@@ -5,6 +5,8 @@ import {Artist} from "./models/Models";
 import {SearchBarWrapperBar} from "./wrappers/SearchBarWrapper";
 import {EventListWrapper} from "./wrappers/EventListWrapper";
 import {ArtistComponent} from "./components/ArtistComponent";
+import { DateQuery } from "./components/SearchBar";
+import { LOCAL_STORAGE_LAST_DATE_QUERY_KEY } from "./LocalStorageKeys";
 
 // Artist can be in a few states, explicitly state them and force the programmer to handle them
 export type ArtistState = ArtistState.FoundArtist | ArtistState.NotFound | ArtistState.NoValue | ArtistState.Loading;
@@ -29,16 +31,21 @@ export namespace ArtistState {
 
 interface AppState {
     artistState: ArtistState;
+    dateQuery: DateQuery | null;
 }
 
 class App extends React.Component<{}, AppState> {
     constructor(props: {}) {
         super(props);
 
+        const lastDateStr = localStorage.getItem(LOCAL_STORAGE_LAST_DATE_QUERY_KEY);
+        const lastDate = lastDateStr === null ? null : JSON.parse(lastDateStr);
+
         this.state = {
             artistState: {
                 type: "NoValue"
-            }
+            },
+            dateQuery: lastDate
         };
     }
 
@@ -76,13 +83,29 @@ class App extends React.Component<{}, AppState> {
         }
     }
 
+    handleDateQueryChange = (dates: DateQuery | null) => {
+        if (dates === null) {
+            localStorage.removeItem(LOCAL_STORAGE_LAST_DATE_QUERY_KEY);
+        } else {
+            localStorage.setItem(LOCAL_STORAGE_LAST_DATE_QUERY_KEY, JSON.stringify(dates));
+        }
+        this.setState({ dateQuery: dates });
+    }
+
     public render() {
         return (
             <div className="App__root">
                 <div className={"App__bodyContainer"}>
-                    <SearchBarWrapperBar onArtistStateChange={this.handleArtistChange}/>
+                    <SearchBarWrapperBar
+                        onArtistStateChange={this.handleArtistChange}
+                        dateQuery={this.state.dateQuery}
+                        onDateQueryChange={this.handleDateQueryChange}
+                    />
                     {this.renderArtist(this.state.artistState)}
-                    <EventListWrapper artistState={this.state.artistState}/>
+                    <EventListWrapper
+                        artistState={this.state.artistState}
+                        dateQuery={this.state.dateQuery}
+                    />
                 </div>
             </div>
         );

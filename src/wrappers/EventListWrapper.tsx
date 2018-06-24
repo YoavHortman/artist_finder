@@ -5,9 +5,11 @@ import {Artist, ArtistEventData} from "../models/Models";
 import "./EventListWrapper.css";
 import {EventList} from "../components/EventList";
 import {ArtistState} from "../App";
+import { DateQuery } from "../components/SearchBar";
 
 export interface EventListWrapperProps {
     artistState: ArtistState;
+    dateQuery: DateQuery | null;
 }
 
 export interface EventListWrapperState {
@@ -48,7 +50,7 @@ export class EventListWrapper extends React.Component<EventListWrapperProps, Eve
     }
 
     async getEventsForArtist(artist: Artist) {
-        this.setState({events: await getArtistEventsByName(artist.name)});
+        this.setState({events: await getArtistEventsByName(artist.name, this.props.dateQuery)});
     }
 
     render() {
