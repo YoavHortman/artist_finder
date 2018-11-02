@@ -84,7 +84,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                     this.state.showAdvancedOptions ?
                         <div className={"SearchBar__advancedOptionsContainer"}>
                             <div>
-                                From:
+                                Only show me events starting from:
                                 <input
                                     className={"SearchBar__dateInput"}
                                     type={"date"}
@@ -94,7 +94,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                                 />
                             </div>
                             <div className={"SearchBar__toContainer"}>
-                                To:
+                                And only until:
                                 <input
                                     className={"SearchBar__dateInput"}
                                     type={"date"}

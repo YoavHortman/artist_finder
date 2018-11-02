@@ -62,7 +62,7 @@ class App extends React.Component<{}, AppState> {
             }
             case "Loading": {
                 return (
-                    <div className={"App__artistSearchState"}>Loading...</div>
+                    <div className={"App__artistSearchState"}>Loading... If this takes too long make sure you have cors-headers extension installed!</div>
                 );
             }
             case "NotFound": {
